@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste2</title>
+    <style>
+
+        body {
+            display: flex;
+            justify-content: center;  /* Centraliza horizontalmente */
+            align-items: center;      /* Centraliza verticalmente */
+            height: 100vh;            /* Altura total da tela */
+            margin: 0;                /* Remove margens padrão */
+            /* font-size: 30px; */
+            background: rgb(255, 255, 222);
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        div {
+            border: 1px solid gray;
+            position: absolute;
+            padding: 40px;
+            text-align: center;
+            border-radius: 20px;
+            background: white;    
+        }
+
+        h1 {
+            font-size: 40px;
+        }
+
+        input {
+            width: 100%;
+            height: 20px;
+            padding: 5px;
+        }
+
+        button {
+            width: 60%;
+            height: 30px;
+            font-size: 15px;
+        }
+
+        
+         
+    </style>
+</head>
+<body>
+    
+    <div>
+
+        <h1 id="nome">Qual o seu nome?</h1>
+        <input type="text" id="nomeInput">
+        <button id="submitName" onclick="enviarNome()">Enviar</button>
+        
+        <h3 id="idade"></h3>
+        <input type="number" id="idadeInput">
+        <button id="submitAge" onclick="enviarIdade()">Enviar</button>
+    </div>
+
+    <script>
+        // Ocultando os elementos da 2° pergunta!
+        document.getElementById("idade").style.display = "none";
+        document.getElementById("idadeInput").style.display = "none";
+        document.getElementById("submitAge").style.display = "none";
+
+        // variavel para o nome | ESCOPO GLOBAL
+        var nomeInserido
+
+        // Função que armazena o nome inserido e responde ao usuario
+        // Inserindo uma nova pergunta e escondendo a pergunta anterior
+        function enviarNome () {
+            // armazenando o nome
+            nomeInserido = document.getElementById("nomeInput").value
+
+            // Retornando a resposta concatenando o nome inserido
+            document.getElementById("nome").innerHTML = "<h1> Olá, " + nomeInserido + " ! Tudo bem? </h1>"
+
+            // Escondendo elementos ja ultilizados
+            document.getElementById("nomeInput").style.display = "none"; 
+            document.getElementById("submitName").style.display = "none"; 
+
+            // Retornando elementos que estavam ocultos
+            document.getElementById("idade").style.display = "block"; 
+            document.getElementById("idadeInput").style.display = "block";
+            const botao = document.getElementById("submitAge");
+
+            // Mostra o botão
+            botao.style.display = "block"; // Certifique-se de que o estilo de centralização seja aplicado
+            botao.style.margin = "0 auto"; // Centraliza em um layout de bloco
+            botao.style.position = "static"; // Remove posicionamento absoluto, se necessário
+            
+            // Gerando a nova pergunta concatenando o nome inserido
+            document.getElementById("idade").innerHTML =  nomeInserido + " qual é a sua idade ? "
+        }
+
+        function enviarIdade() {
+            // armazenando a idade
+            var idadeInserida = document.getElementById("idadeInput").value
+            idadeInserida = parseInt(idadeInserida) // Conversão para numero inteiro
+            
+            var faixaEtaria 
+            
+            // Condição para saber a faixa etaria
+            if (idadeInserida < 13) {
+                faixaEtaria = "Criança"
+            } else if (idadeInserida < 21) {
+                faixaEtaria = "Adolescente"
+            } else if (idadeInserida < 34) {
+                faixaEtaria = "Jovem"
+            } else if (idadeInserida < 60) {
+                faixaEtaria = "Adulto(a)"
+            } else {
+                faixaEtaria = "Idoso(a)"
+            }
+            
+            
+            // Escondendo os elementos
+            document.getElementById("idade").style.display = "none"; 
+            document.getElementById("idadeInput").style.display = "none";
+            document.getElementById("submitAge").style.display = "none";
+            
+            // Retornando a resposta concatenando a idade | nome | faixa etaria
+            document.getElementById("nome").innerHTML = nomeInserido + " você tem " + idadeInserida + " anos e é " + faixaEtaria;
+        }
+    </script>
+</body>
+</html>
